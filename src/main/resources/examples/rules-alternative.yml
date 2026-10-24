@@ -1,0 +1,51 @@
+# Same engine, different business rules - no code change.
+# Run with:
+#   ./mvnw spring-boot:run -Dspring-boot.run.arguments="--spring.config.additional-location=file:src/main/resources/examples/rules-alternative.yml"
+# (the rule list replaces the one from application.yml)
+#
+# Differences to application.yml:
+#   - daily overtime already applies above the expected duration on Saturdays, too
+#   - weekly threshold is 38.5 h (2310 min)
+#   - "attendance" is hidden in the output but still used by other rules
+#   - there are no Sunday / public-holiday wages
+evaluation:
+  rules:
+    - name: attendance
+      type: ATTENDANCE_SUM
+      scope: DAY
+      visible: false
+
+    - name: daily-overtime
+      type: EXCESS_OVER_EXPECTED
+      scope: DAY
+      input: attendance
+      days: [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY]
+
+    - name: outside-window
+      type: OUTSIDE_WINDOW
+      scope: DAY
+
+    - name: week-attendance
+      type: SUM_OVER_DAYS
+      scope: WEEK
+      input: attendance
+      visible: false
+
+    - name: week-daily-overtime
+      type: SUM_OVER_DAYS
+      scope: WEEK
+      input: daily-overtime
+      visible: false
+
+    - name: week-overtime-before-reconciliation
+      type: EXCESS_OVER_THRESHOLD
+      scope: WEEK
+      input: week-attendance
+      threshold-minutes: 2310
+      visible: false
+
+    - name: weekly-overtime
+      type: SUBTRACT_FLOOR_ZERO
+      scope: WEEK
+      input: week-overtime-before-reconciliation
+      subtract: week-daily-overtime

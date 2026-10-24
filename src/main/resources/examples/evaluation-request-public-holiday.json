@@ -1,0 +1,72 @@
+{
+  "periodStart": "2026-10-19",
+  "periodEnd": "2026-10-25",
+  "attendanceIntervals": [
+    {
+      "date": "2026-10-19",
+      "startTime": "09:00",
+      "endTime": "12:00"
+    },
+    {
+      "date": "2026-10-19",
+      "startTime": "13:00",
+      "endTime": "18:00"
+    },
+    {
+      "date": "2026-10-25",
+      "startTime": "09:00",
+      "endTime": "13:00"
+    }
+  ],
+  "dailyInformation": [
+    {
+      "date": "2026-10-19",
+      "publicHoliday": false,
+      "expectedDurationMinutes": 480,
+      "windowStart": "09:00",
+      "windowEnd": "17:00"
+    },
+    {
+      "date": "2026-10-20",
+      "publicHoliday": false,
+      "expectedDurationMinutes": 480,
+      "windowStart": "09:00",
+      "windowEnd": "17:00"
+    },
+    {
+      "date": "2026-10-21",
+      "publicHoliday": false,
+      "expectedDurationMinutes": 480,
+      "windowStart": "09:00",
+      "windowEnd": "17:00"
+    },
+    {
+      "date": "2026-10-22",
+      "publicHoliday": false,
+      "expectedDurationMinutes": 480,
+      "windowStart": "09:00",
+      "windowEnd": "17:00"
+    },
+    {
+      "date": "2026-10-23",
+      "publicHoliday": false,
+      "expectedDurationMinutes": 480,
+      "windowStart": "09:00",
+      "windowEnd": "17:00"
+    },
+    {
+      "date": "2026-10-24",
+      "publicHoliday": false,
+      "expectedDurationMinutes": 0,
+      "windowStart": null,
+      "windowEnd": null
+    },
+    {
+      "date": "2026-10-25",
+      "publicHoliday": true,
+      "expectedDurationMinutes": 0,
+      "windowStart": null,
+      "windowEnd": null
+    }
+  ]
+}

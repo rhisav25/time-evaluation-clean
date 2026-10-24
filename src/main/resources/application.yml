@@ -1,0 +1,64 @@
+# Rules are evaluated top to bottom. A rule may only use rules defined above it.
+# visible: false  -> intermediate value, not part of the response (default: true)
+evaluation:
+  rules:
+    # ---- DAY rules ----------------------------------------------------------
+    # Scenario 1: attendance duration (gaps between intervals are excluded)
+    - name: attendance
+      type: ATTENDANCE_SUM
+      scope: DAY
+
+    # Scenario 2: daily overtime above the expected duration, Monday-Friday only
+    - name: daily-overtime
+      type: EXCESS_OVER_EXPECTED
+      scope: DAY
+      input: attendance
+      days: [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY]
+
+    # Scenario 3: attendance outside the expected working window
+    - name: outside-window
+      type: OUTSIDE_WINDOW
+      scope: DAY
+
+    # Scenario 4: Sunday work (not when the Sunday is also a public holiday) ...
+    - name: sunday-work
+      type: DAY_FILTER
+      scope: DAY
+      input: attendance
+      days: [SUNDAY]
+      public-holiday: false
+
+    # ... and public-holiday work (wins over Sunday work)
+    - name: public-holiday-work
+      type: DAY_FILTER
+      scope: DAY
+      input: attendance
+      public-holiday: true
+
+    # ---- WEEK rules (Monday-Sunday) ------------------------------------------
+    # Scenario 5: weekly overtime above 40 h (2400 min) over all seven days,
+    # reduced by the daily overtime that was already accounted for.
+    - name: week-attendance
+      type: SUM_OVER_DAYS
+      scope: WEEK
+      input: attendance
+      visible: false
+
+    - name: week-daily-overtime
+      type: SUM_OVER_DAYS
+      scope: WEEK
+      input: daily-overtime
+      visible: false
+
+    - name: week-overtime-before-reconciliation
+      type: EXCESS_OVER_THRESHOLD
+      scope: WEEK
+      input: week-attendance
+      threshold-minutes: 2400
+      visible: false
+
+    - name: weekly-overtime
+      type: SUBTRACT_FLOOR_ZERO
+      scope: WEEK
+      input: week-overtime-before-reconciliation
+      subtract: week-daily-overtime
