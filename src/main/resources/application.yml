@@ -16,7 +16,7 @@ evaluation:
       type: ATTENDANCE_SUM
       scope: DAY
 
-    # Scenario 2: daily overtime above the expected duration, Monday-Friday only
+    # Scenario 2: daily overtime above the expected duration, Monday-Friday
     - name: daily-overtime
       type: EXCESS_OVER_EXPECTED
       scope: DAY

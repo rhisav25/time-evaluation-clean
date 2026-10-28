@@ -7,3 +7,8 @@ target/
 .settings/
 *.log
 .DS_Store
+
+# Local-only notes and reference material (not part of the deliverable)
+docs/*.pdf
+docs/requirement.md
+docs/LEARNING.md
