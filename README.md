@@ -38,6 +38,10 @@ $response | ConvertTo-Json -Depth 10
 
 Weekly rules need a complete Monday-Sunday period. If no weekly rule is configured, any period is accepted.
 
+### Test client
+
+A standalone Python helper that posts each scenario to the running API and saves the response lives in a separate repo, for easy end-to-end testing: https://github.com/rhisav25/time-evaluation-engine-test (stdlib only — start this app, then run it).
+
 ## Example inputs and configurations
 
 `src/main/resources/examples/`:
