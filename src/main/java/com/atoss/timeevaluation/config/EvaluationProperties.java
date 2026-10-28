@@ -8,7 +8,6 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 
 /**
  * Rule configuration loaded from application.yml.
- * Rules are evaluated in the order listed; a rule may only reference rules defined above it.
  */
 @ConfigurationProperties(prefix = "evaluation")
 public record EvaluationProperties(List<RuleDefinition> rules) {

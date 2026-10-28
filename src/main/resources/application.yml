@@ -1,3 +1,11 @@
+# Every log line carries the per-request trace id (set by TraceIdFilter via the MDC).
+# "no-trace" shows for log lines emitted outside a request (e.g. startup).
+logging:
+  level:
+    com.atoss.timeevaluation: DEBUG
+  pattern:
+    level: "%5p [traceId=%X{traceId:-no-trace}]"
+
 # Rules are evaluated top to bottom. A rule may only use rules defined above it.
 # visible: false  -> intermediate value, not part of the response (default: true)
 evaluation:

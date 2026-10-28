@@ -45,7 +45,6 @@ Weekly rules need a complete Monday-Sunday period. If no weekly rule is configur
 - `evaluation-request-example-a.json` - 42 h week: 4 h daily overtime, 0 h weekly overtime remaining
 - `evaluation-request-example-b.json` - 46 h week: 2 h daily overtime, 4 h weekly overtime remaining
 - `evaluation-request-public-holiday.json` - a Sunday that is also a public holiday: only the holiday wage
-- `rules-alternative.yml` - a different rule set for the same engine (see the file for how to run it)
 
 ## Configuring rules
 
@@ -97,4 +96,4 @@ Adding a **new rule type** needs one small class implementing `Rule`, an enum va
 
 ## Design and assumptions
 
-See `docs/design.md`. To study the code, start with `docs/LEARNING.md`.
+See `docs/design.md`.

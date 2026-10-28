@@ -3,6 +3,8 @@ package com.atoss.timeevaluation.rule;
 import com.atoss.timeevaluation.config.EvaluationProperties.RuleDefinition;
 import com.atoss.timeevaluation.config.RuleType;
 import com.atoss.timeevaluation.config.Scope;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +19,8 @@ import java.util.Map;
  * rules defined above it. This also rules out circular references.
  */
 public final class RuleFactory {
+
+    private static final Logger log = LoggerFactory.getLogger(RuleFactory.class);
 
     private RuleFactory() {
     }
@@ -51,8 +55,11 @@ public final class RuleFactory {
 
             defined.put(rule.name(), rule.scope());
             rules.add(rule);
+            log.debug("Registered rule '{}' (type {}, scope {})",
+                    definition.name(), definition.type(), definition.scope());
         }
 
+        log.info("Validated and loaded {} rule(s) from configuration", rules.size());
         return List.copyOf(rules);
     }
 
